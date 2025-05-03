@@ -1,0 +1,108 @@
+@startuml
+package "vehiclepackage" #DDDDDD {
+ 
+
+abstract class Vehicle {
+    - boolean leased
+    - String plateNumber
+    - String make
+    - String model
+    - int yearOfProduction
+    # abstract String generatePlateNumber()
+    + String getPlateNumber()
+    + String getMake()
+    + String getModel()
+    + int getYearOfProduction()
+    + boolean getLeased()
+    + void setMake(String)
+    + void setModel(String)
+    + void setYearOfProduction(int)
+    + void setLeased(Boolean)
+    + boolean equals(Object)
+    + String toString()
+}
+
+abstract class Truck extends Vehicle {
+    - double maxCapacity
+    + void setMaxCapacity(double)
+    + double getMaxCapacity()
+    + boolean equals(Object)
+    + String toString()
+}
+
+abstract class Car extends Vehicle {
+    - int maxPassengers
+    + void setMaxPassengers(int)
+    + int getMaxPassengers()
+    + boolean equals(Object)
+    + String toString()
+}
+
+class DieselTruck extends Truck {
+    - static int dieselTruckCount
+    - double tankCapacity
+    + void setTankCapacity(double)
+    + double getTankCapacity()
+    + boolean equals(Object)
+    + String toString()
+    + String generatePlateNumber()
+}
+
+class ElectricTruck extends Truck {
+    - static int electricTruckCount
+    - double maxAutonomy
+    + void setMaxAutonomy(double)
+    + double getMaxAutonomy()
+    + boolean equals(Object)
+    + String toString()
+    + String generatePlateNumber()
+}
+
+class ElectricCar extends Car {
+    - static int electricCarCount
+    - double maxAutonomy
+    + void setMaxAutonomy(double)
+    + double getMaxAutonomy()
+    + boolean equals(Object)
+    + String toString()
+    + String generatePlateNumber()
+}
+
+class GasolineCar extends Car {
+    - static int gasolineCarCount
+    + boolean equals(Object)
+    + String toString()
+    + String generatePlateNumber()
+}
+
+Vehicle <|-- Truck
+Vehicle <|-- Car
+Truck <|-- DieselTruck
+Truck <|-- ElectricTruck
+Car <|-- ElectricCar
+Car <|-- GasolineCar
+}
+package "clientpackage" #DDDDDD {
+class Client {
+    + String firstName
+    + String lastName
+    + String address
+    # Vehicle[] vehiclesArray
+    + public String getFirstName()
+	+ setFirstName(String firstName) 
+	+ String getLastName() 
+	+ void setLastName(String lastName) 
+	+ String getAddress() 
+	+ void setAddress(String address) 
+	+ Vehicle[] getVehiclesArray() 
+	+ void setVehiclesArray(Vehicle[] vehiclesArray) 
+	+ boolean equals(Object otherObject) 
+	+ String toString() 
+	#void leaseVehicle(Vehicle vehicle)
+	#void returnVehicle(Vehicle vehicle) 
+	#void showClientsVehicles() 
+
+}
+Vehicle --> Client
+}
+@enduml
